@@ -1,0 +1,25 @@
+node_modules
+dist
+.claude
+
+# TypeScript
+*.tsbuildinfo
+
+# npm/pnpm
+npm-debug.log*
+.pnpm-debug.log*
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# Environment
+.env
+.env.local
+
+# Test coverage
+coverage
+.nyc_output
