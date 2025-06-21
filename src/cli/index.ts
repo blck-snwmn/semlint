@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import { readFileSync } from 'fs';
-import { getParser } from '../parsers';
-import { SemanticAnalyzer } from '../analyzers/semantic';
-import { AnalysisResult } from '../types';
+import { readFileSync } from "fs";
+import { getParser } from "../parsers";
+import { SemanticAnalyzer } from "../analyzers/semantic";
+import { AnalysisResult } from "../types";
 
 async function main() {
   // 引数チェック
   const args = process.argv.slice(2);
   if (args.length === 0) {
-    console.error('Usage: semlint <file>');
+    console.error("Usage: semlint <file>");
     process.exit(1);
   }
 
@@ -17,8 +17,8 @@ async function main() {
 
   try {
     // ファイル読み込み
-    const content = readFileSync(filePath, 'utf-8');
-    
+    const content = readFileSync(filePath, "utf-8");
+
     // パーサー取得と関数抽出
     const parser = getParser(filePath);
     const functions = parser.parse(content);
@@ -39,9 +39,8 @@ async function main() {
 
     // サマリー表示
     displaySummary(results);
-
   } catch (error) {
-    console.error('Error:', error instanceof Error ? error.message : error);
+    console.error("Error:", error instanceof Error ? error.message : error);
     process.exit(1);
   }
 }
@@ -49,10 +48,11 @@ async function main() {
 function displayResults(results: AnalysisResult[]) {
   for (const result of results) {
     const icon = getIcon(result.evaluation);
-    const status = result.evaluation === 'match' ? '✓' : result.evaluation === 'unclear' ? '?' : '✗';
-    
+    const status =
+      result.evaluation === "match" ? "✓" : result.evaluation === "unclear" ? "?" : "✗";
+
     console.log(`${status} ${result.functionName.padEnd(20)} ${icon} ${result.evaluation}`);
-    if (result.reason && result.evaluation !== 'match') {
+    if (result.reason && result.evaluation !== "match") {
       console.log(`  └─ ${result.reason}`);
     }
   }
@@ -60,22 +60,26 @@ function displayResults(results: AnalysisResult[]) {
 
 function displaySummary(results: AnalysisResult[]) {
   const counts = {
-    match: results.filter(r => r.evaluation === 'match').length,
-    unclear: results.filter(r => r.evaluation === 'unclear').length,
-    mismatch: results.filter(r => r.evaluation === 'mismatch').length,
+    match: results.filter((r) => r.evaluation === "match").length,
+    unclear: results.filter((r) => r.evaluation === "unclear").length,
+    mismatch: results.filter((r) => r.evaluation === "mismatch").length,
   };
 
-  console.log('\nSummary:', 
+  console.log(
+    "\nSummary:",
     `${results.length} functions analyzed`,
-    `(${counts.match} match, ${counts.unclear} unclear, ${counts.mismatch} mismatch)`
+    `(${counts.match} match, ${counts.unclear} unclear, ${counts.mismatch} mismatch)`,
   );
 }
 
-function getIcon(evaluation: 'match' | 'unclear' | 'mismatch'): string {
+function getIcon(evaluation: "match" | "unclear" | "mismatch"): string {
   switch (evaluation) {
-    case 'match': return '👍';
-    case 'unclear': return '🤔';
-    case 'mismatch': return '❌';
+    case "match":
+      return "👍";
+    case "unclear":
+      return "🤔";
+    case "mismatch":
+      return "❌";
   }
 }
 

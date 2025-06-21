@@ -1,5 +1,5 @@
-import { query, type SDKMessage } from '@anthropic-ai/claude-code';
-import { FunctionInfo, AnalysisResult } from '../types';
+import { query, type SDKMessage } from "@anthropic-ai/claude-code";
+import { FunctionInfo, AnalysisResult } from "../types";
 
 export class SemanticAnalyzer {
   async analyzeFunctions(functions: FunctionInfo[]): Promise<AnalysisResult[]> {
@@ -15,7 +15,7 @@ export class SemanticAnalyzer {
 
   private async analyzeFunction(func: FunctionInfo): Promise<AnalysisResult> {
     const prompt = this.createAnalysisPrompt(func);
-    
+
     try {
       const messages: SDKMessage[] = [];
       const abortController = new AbortController();
@@ -38,8 +38,8 @@ export class SemanticAnalyzer {
       console.error(`Error analyzing function ${func.name}:`, error);
       return {
         functionName: func.name,
-        evaluation: 'unclear',
-        reason: 'Analysis failed due to an error'
+        evaluation: "unclear",
+        reason: "Analysis failed due to an error",
       };
     }
   }
@@ -54,7 +54,7 @@ Please analyze the following function from three perspectives:
 3. **Naming-Comment Consistency**: Does the function name match its comment/documentation?
 
 Function name: ${func.name}
-${func.comment ? `Comment: ${func.comment}` : 'Comment: None'}
+${func.comment ? `Comment: ${func.comment}` : "Comment: None"}
 
 Implementation:
 \`\`\`
@@ -75,9 +75,11 @@ REASON: [Explain the reason for your evaluation in 1-2 sentences]
   private parseResponse(messages: SDKMessage[], functionName: string): AnalysisResult {
     // Claude Codeの応答から評価結果を抽出
     for (const msg of messages) {
-      if (msg.type === 'assistant' && msg.message.content) {
-        const content = Array.isArray(msg.message.content) 
-          ? msg.message.content.map((c: any) => typeof c === 'string' ? c : c.type === 'text' ? c.text : '').join('')
+      if (msg.type === "assistant" && msg.message.content) {
+        const content = Array.isArray(msg.message.content)
+          ? msg.message.content
+              .map((c: any) => (typeof c === "string" ? c : c.type === "text" ? c.text : ""))
+              .join("")
           : msg.message.content;
 
         // 評価結果を抽出
@@ -87,8 +89,8 @@ REASON: [Explain the reason for your evaluation in 1-2 sentences]
         if (evaluationMatch) {
           return {
             functionName,
-            evaluation: evaluationMatch[1].toLowerCase() as 'match' | 'unclear' | 'mismatch',
-            reason: reasonMatch ? reasonMatch[1].trim() : undefined
+            evaluation: evaluationMatch[1].toLowerCase() as "match" | "unclear" | "mismatch",
+            reason: reasonMatch ? reasonMatch[1].trim() : undefined,
           };
         }
       }
@@ -97,8 +99,8 @@ REASON: [Explain the reason for your evaluation in 1-2 sentences]
     // パースできない場合はunclearとして扱う
     return {
       functionName,
-      evaluation: 'unclear',
-      reason: 'Could not parse analysis result'
+      evaluation: "unclear",
+      reason: "Could not parse analysis result",
     };
   }
 }

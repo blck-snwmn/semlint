@@ -8,7 +8,7 @@ export interface FunctionInfo {
 
 export interface AnalysisResult {
   functionName: string;
-  evaluation: 'match' | 'unclear' | 'mismatch';
+  evaluation: "match" | "unclear" | "mismatch";
   reason?: string;
 }
 
