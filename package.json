@@ -9,11 +9,13 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
     "lint": "oxlint .",
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "check": "tsc --noEmit && pnpm run lint && pnpm run format:check"
+    "check": "tsc --noEmit && pnpm run lint && pnpm run format:check && pnpm run test"
   },
   "keywords": [
     "lint",
@@ -28,8 +30,10 @@
   "devDependencies": {
     "@biomejs/biome": "^2.0.4",
     "@types/node": "^24.0.3",
+    "@vitest/coverage-v8": "^3.2.4",
     "oxlint": "^1.2.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@anthropic-ai/claude-code": "^1.0.31"
