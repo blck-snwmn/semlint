@@ -37,7 +37,7 @@ describe("TypeScriptParser", () => {
   });
 
   describe("arrow functions", () => {
-    it.skip("should parse arrow function with parameters", () => {
+    it("should parse arrow function with parameters", () => {
       const code = `const divide = (a: number, b: number): number => {
   return a / b;
 };`;

@@ -7,7 +7,14 @@ export default defineConfig({
     include: ["src/**/*.test.ts", "src/**/*.spec.ts"],
     coverage: {
       reporter: ["text", "html"],
-      exclude: ["node_modules/", "dist/", "src/**/*.test.ts", "src/**/*.spec.ts"],
+      exclude: [
+        "node_modules/",
+        "dist/",
+        "src/**/*.test.ts",
+        "src/**/*.spec.ts",
+        "examples/",
+        "vitest.config.ts",
+      ],
     },
   },
 });

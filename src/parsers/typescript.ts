@@ -10,7 +10,7 @@ export class TypeScriptParser {
       // function宣言
       /^\s*(?:export\s+)?(?:async\s+)?function\s+(\w+)\s*\(/,
       // アロー関数（const/let/var）
-      /^\s*(?:export\s+)?(?:const|let|var)\s+(\w+)\s*=\s*(?:async\s+)?\([^)]*\)\s*=>/,
+      /^\s*(?:export\s+)?(?:const|let|var)\s+(\w+)\s*=\s*(?:async\s+)?(?:\([^)]*\)|[a-zA-Z_]\w*)(?:\s*:\s*[^=]+)?\s*=>/,
       // メソッド（クラス内）
       /^\s*(?:public|private|protected)?\s*(?:static)?\s*(?:async)?\s*(\w+)\s*\([^)]*\)\s*(?::\s*[^{]+)?\s*{/,
       // メソッド（簡略記法）
