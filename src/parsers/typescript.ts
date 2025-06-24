@@ -27,6 +27,8 @@ export class TypeScriptParser {
           const startLine = i + 1;
 
           // 関数の終了位置を探す（簡易版）
+          // TODO: Phase 2 - 文字列内の中括弧を無視する処理を追加
+          // 現在の実装では "Hello {user}" のような文字列内の括弧もカウントしてしまう
           let braceCount = 0;
           let endLine = startLine;
           let foundStart = false;
