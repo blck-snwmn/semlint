@@ -1,14 +1,11 @@
-// 正しい実装の例
 function add(a: number, b: number): number {
   return a + b;
 }
 
-// 間違った実装の例 - 関数名はmultiplyだが、実際は足し算をしている
 function multiply(x: number, y: number): number {
   return x + y;
 }
 
-// 曖昧な例 - getAverageという名前だが、平均値と中央値の両方を計算している可能性
 function getAverage(numbers: number[]): number {
   const sum = numbers.reduce((acc, num) => acc + num, 0);
   const avg = sum / numbers.length;
@@ -20,24 +17,21 @@ function getAverage(numbers: number[]): number {
   return avg;
 }
 
-// コメント付きの例
 /**
  * 2つの数値を掛け算する
  */
 function subtract(a: number, b: number): number {
-  return a - b; // 実際は引き算をしている
+  return a - b;
 }
 
-// アロー関数の例
 const divide = (a: number, b: number): number => {
   return a / b;
 };
 
-// クラスメソッドの例
 class MathUtils {
   // 最大値を取得
   getMin(values: number[]): number {
-    return Math.min(...values); // 実際は最小値を返している
+    return Math.min(...values);
   }
 
   getMax(values: number[]): number {
